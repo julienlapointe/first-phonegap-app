@@ -11,9 +11,9 @@
 <!-- ZIM is free to use. You can donate to help improve ZIM at http://zimjs.com/donate 	-->
 
 <!-- as of ZIM 4.3.0 load createjs namespace first -->
-<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+<script src="js/create.js"></script>
 <script>var zon = true; // true for comments from zim code</script>
-<script src="https://d309knd7es5f10.cloudfront.net/zim_4.8.0.js"></script>
+<script src="js/zim.js"></script>
 <!-- use zimjs.com/code/distill for minified individual functions! -->
 
 <style>
@@ -29,9 +29,9 @@
 // "full"		sets stage to window size with no scaling
 // "tagID"		add canvas to HTML tag of ID - set to dimensions if provided - no scaling
 
-var scaling = "fit"; // fit scales to fit the browser window while keeping the aspect ratio
-var width = 1024; // can go higher...
-var height = 768;
+var scaling = "full"; // fit scales to fit the browser window while keeping the aspect ratio
+var width = null; // can go higher...
+var height = null;
 var color = "#acd241";
 var frame = new zim.Frame(scaling, width, height, color); // see docs for more options and info
 frame.on("ready", function() {
@@ -43,10 +43,13 @@ frame.on("ready", function() {
 
 	// put your code here (you can delete this code)
 
-	var button = new zim.Button(140, 60, "ZIM");
-	button.center(stage); // this adds to stage as well otherwise stage.addChild(button);
-	button.on("click", function() { // on() is like addEventListener()
-		zgo("http://zimjs.com/code/frame.html"); // or relative URL, target is available too
+	var circle = new zim.Circle(100, frame.pink)
+		.center(stage)
+		.drag();
+
+	frame.on("resize", function(){
+		circle.center(stage);
+		stage.update();
 	});
 
 	stage.update(); // update the stage to see any changes
