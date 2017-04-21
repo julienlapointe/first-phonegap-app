@@ -111,6 +111,10 @@ function startGame()
 // $(document).on("pageshow", "#gameplay-screen", function() 
 window.onload = function() 
 {
+	$.mobile.changePage("#welcome-screen"+"#gameplay-screen", {
+        transition: "slide",
+        reverse: true
+    });
 	boxes = $('.box');
 	boxes = [].slice.call($('.box'));
 	console.log(boxes);
